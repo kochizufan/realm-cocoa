@@ -98,8 +98,9 @@ static NSMutableDictionary *s_localNameToClass;
         if (!RLMIsSubclass(cls, RLMObjectBase.class)) {
             continue;
         }
-
+        
         NSString *className = NSStringFromClass(cls);
+        
         if ([RLMSwiftSupport isSwiftClassName:className]) {
             className = [RLMSwiftSupport demangleClassName:className];
             s_localNameToClass[className] = cls;

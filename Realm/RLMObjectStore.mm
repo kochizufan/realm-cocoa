@@ -426,11 +426,13 @@ RLMResults *RLMGetObjects(RLMRealm *realm, NSString *objectClassName, NSPredicat
 
     // create view from table and predicate
     RLMObjectSchema *objectSchema = realm.schema[objectClassName];
+    
     if (!objectSchema.table) {
         // read-only realms may be missing tables since we can't add any
         // missing ones on init
         return [RLMEmptyResults emptyResultsWithObjectClassName:objectClassName realm:realm];
     }
+    
     tightdb::Query query = objectSchema.table->where();
     RLMUpdateQueryWithPredicate(&query, predicate, realm.schema, objectSchema);
     
@@ -438,6 +440,7 @@ RLMResults *RLMGetObjects(RLMRealm *realm, NSString *objectClassName, NSPredicat
     __autoreleasing RLMResults * results = [RLMResults resultsWithObjectClassName:objectClassName
                                                                             query:std::make_unique<Query>(query)
                                                                             realm:realm];
+    
     return results;
 }
 

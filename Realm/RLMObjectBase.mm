@@ -29,7 +29,7 @@
 
 // standalone init
 - (instancetype)init {
-    return [self initWithObjectSchema:[self.class sharedSchema]];
+    return [self initWithObjectSchema:[self.class sharedSchema:self.class.className]];
 }
 
 - (instancetype)initWithObjectSchema:(RLMObjectSchema *)schema {
@@ -132,6 +132,11 @@
 // overridden at runtime per-class for performance
 + (RLMObjectSchema *)sharedSchema {
     return RLMSchema.sharedSchema[self.className];
+}
+
+//For Xamarin
++ (RLMObjectSchema *)sharedSchema:(NSString *)className {
+    return RLMSchema.sharedSchema[className];
 }
 
 - (NSArray *)linkingObjectsOfClass:(NSString *)className forProperty:(NSString *)property {

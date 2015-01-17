@@ -93,6 +93,8 @@
     const char *code = _objcRawType.UTF8String;
     _objcType = *code;    // first char of type attr
 
+    NSLog(@"ObjCType: %c",_objcType);
+    
     // map to RLMPropertyType
     switch (self.objcType) {
         case 's':   // short

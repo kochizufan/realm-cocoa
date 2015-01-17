@@ -45,14 +45,17 @@
 }
 
 + (instancetype)createInDefaultRealmWithObject:(id)object {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     return (RLMObject *)RLMCreateObjectInRealmWithValue([RLMRealm defaultRealm], [self className], object, RLMCreationOptionsAllowCopy);
 }
 
 + (instancetype)createInRealm:(RLMRealm *)realm withObject:(id)value {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     return (RLMObject *)RLMCreateObjectInRealmWithValue(realm, [self className], value, RLMCreationOptionsAllowCopy);
 }
 
 + (instancetype)createOrUpdateInDefaultRealmWithObject:(id)object {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     // verify primary key
     RLMObjectSchema *schema = [self sharedSchema];
     if (!schema.primaryKeyProperty) {
@@ -64,6 +67,7 @@
 }
 
 + (instancetype)createOrUpdateInRealm:(RLMRealm *)realm withObject:(id)value {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     return (RLMObject *)RLMCreateObjectInRealmWithValue(realm, [self className], value, RLMCreationOptionsUpdateOrCreate | RLMCreationOptionsAllowCopy);
 }
 
@@ -76,46 +80,61 @@
 }
 
 + (RLMResults *)allObjects {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     return RLMGetObjects(RLMRealm.defaultRealm, self.className, nil);
 }
 
++ (RLMResults *)allObjects:(NSString *)className {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    return RLMGetObjects(RLMRealm.defaultRealm, className, nil);
+}
+
 + (RLMResults *)allObjectsInRealm:(RLMRealm *)realm {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     return RLMGetObjects(realm, self.className, nil);
 }
 
 + (RLMResults *)objectsWhere:(NSString *)predicateFormat, ... {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     va_list args;
     RLM_VARARG(predicateFormat, args);
     return [self objectsWhere:predicateFormat args:args];
 }
 
 + (RLMResults *)objectsWhere:(NSString *)predicateFormat args:(va_list)args {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     return [self objectsWithPredicate:[NSPredicate predicateWithFormat:predicateFormat arguments:args]];
 }
 
 + (RLMResults *)objectsInRealm:(RLMRealm *)realm where:(NSString *)predicateFormat, ... {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     va_list args;
     RLM_VARARG(predicateFormat, args);
     return [self objectsInRealm:realm where:predicateFormat args:args];
 }
 
 + (RLMResults *)objectsInRealm:(RLMRealm *)realm where:(NSString *)predicateFormat args:(va_list)args {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     return [self objectsInRealm:realm withPredicate:[NSPredicate predicateWithFormat:predicateFormat arguments:args]];
 }
 
 + (RLMResults *)objectsWithPredicate:(NSPredicate *)predicate {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     return RLMGetObjects(RLMRealm.defaultRealm, self.className, predicate);
 }
 
 + (RLMResults *)objectsInRealm:(RLMRealm *)realm withPredicate:(NSPredicate *)predicate {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     return RLMGetObjects(realm, self.className, predicate);
 }
 
 + (instancetype)objectForPrimaryKey:(id)primaryKey {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     return RLMGetObject(RLMRealm.defaultRealm, self.className, primaryKey);
 }
 
 + (instancetype)objectInRealm:(RLMRealm *)realm forPrimaryKey:(id)primaryKey {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     return RLMGetObject(realm, self.className, primaryKey);
 }
 
@@ -128,22 +147,27 @@
 }
 
 + (NSString *)className {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     return [super className];
 }
 
 + (RLMPropertyAttributes)attributesForProperty:(NSString *)propertyName {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     return [super attributesForProperty:propertyName];
 }
 
 + (NSDictionary *)defaultPropertyValues {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     return [super defaultPropertyValues];
 }
 
 + (NSString *)primaryKey {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     return [super primaryKey];
 }
 
 + (NSArray *)ignoredProperties {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     return [super ignoredProperties];
 }
 

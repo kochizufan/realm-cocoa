@@ -601,6 +601,8 @@ void update_query_with_predicate(NSPredicate *predicate, RLMSchema *schema,
 
 RLMProperty *RLMValidatedPropertyForSort(RLMObjectSchema *schema, NSString *propName) {
     // validate
+    NSLog(@"Prop name: %@",propName);
+    NSLog(@"%@", [NSThread callStackSymbols]);
     RLMProperty *prop = schema[propName];
     RLMPrecondition(prop, @"Invalid sort column", @"Column named '%@' not found.", prop);
 

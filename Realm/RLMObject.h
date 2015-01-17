@@ -266,6 +266,7 @@
  @return    An RLMResults of all objects of this type in the default Realm.
  */
 + (RLMResults *)allObjects;
++ (RLMResults *)allObjects:(NSString *)className;
 
 /**
  Get objects matching the given predicate for this type from the default Realm.

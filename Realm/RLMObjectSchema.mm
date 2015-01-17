@@ -97,6 +97,9 @@
     schema.objectClass = objectClass;
     schema.accessorClass = RLMObject.class;
     schema.isSwiftClass = isSwift;
+    NSLog(@"Schema checker %@",schema.className);
+    NSLog(@"Schema checker %@",schema.objectClass);
+    NSLog(@"Schema checker %@",schema.accessorClass);
     
     // create array of RLMProperties, inserting properties of superclasses first
     Class cls = objectClass;
@@ -108,6 +111,10 @@
         superClass = class_getSuperclass(superClass);
     }
     schema.properties = props;
+    NSLog(@"Properties count :%d",(int)props.count);
+    for (RLMProperty *prop in props) {
+        NSLog(@"Property checker %@ %d",prop.name,prop.type);
+    }
 
     // verify that we didn't add any properties twice due to inheritance
     assert(props.count == [NSSet setWithArray:[props valueForKey:@"name"]].count);
